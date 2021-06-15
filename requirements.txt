@@ -1,4 +1,1 @@
-opencv-python==4.5.2.52
-opencv-contrib-python==4.5.2.52
-imutils==0.5.4
-djitellopy2==2.3
+-e .
