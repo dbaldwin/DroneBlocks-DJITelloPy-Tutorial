@@ -1,38 +1,45 @@
 from djitellopy import Tello
+import time
 
-print("Create Tello object")
-tello = Tello()
+if __name__ == '__main__':
+    speed = 30
 
-print("Connect to Tello Drone")
-tello.connect()
+    print("Create Tello object")
+    tello = Tello()
 
-battery_level = tello.get_battery()
-print(f"Battery Life Percentage: {battery_level}")
+    print("Connect to Tello Drone")
+    tello.connect()
 
-print("Takeoff!")
-tello.takeoff()
+    battery_level = tello.get_battery()
+    print(f"Battery Life Percentage: {battery_level}")
 
-# tello.go_xyz_speed(x,y,z, speed)
-# x - (+)foward/(-)backwards
-# y - (+)left/(-)right
-# z - (+)up/(-)down
+    print("Takeoff!")
+    tello.takeoff()
 
-# Forward, Right, Up
-print("Go x,y,z: (30,-30,30)")
-tello.go_xyz_speed(30,-30,30, 20)
+    # tello.go_xyz_speed(x,y,z, speed)
+    # x - (+)foward/(-)backwards
+    # y - (+)left/(-)right
+    # z - (+)up/(-)down
 
-# Note that the DJITelloPy documentation indicates that the values
-# x,y,z are between 20-500, the official documentation states the
-# valid values are from -500-500
-# Backwards, Left, Down
-print("Go x,y,z: (-60,60,-60)")
-tello.go_xyz_speed(-60,60,-60, 20)
+    # Forward, Right, Up
+    print("Go x,y,z: (30,-30,30)")
+    tello.go_xyz_speed(30,-30,30, speed)
+    time.sleep(1)
 
-# Forward, Right, Up
-print("Go x,y,z: (30,-30,30)")
-tello.go_xyz_speed(30,-30,30, 20)
+    # Note that the DJITelloPy documentation indicates that the values
+    # x,y,z are between 20-500, the official documentation states the
+    # valid values are from -500-500
+    # Backwards, Left, Down
+    print("Go x,y,z: (-60,60,-60)")
+    tello.go_xyz_speed(-60,60,-60, speed)
+    time.sleep(1)
+
+    # Forward, Right, Up
+    print("Go x,y,z: (30,-30,30)")
+    tello.go_xyz_speed(30,-30,30, speed)
+    time.sleep(1)
 
 
-print("landing")
-tello.land()
-print("touchdown.... goodbye")
+    print("landing")
+    tello.land()
+    print("touchdown.... goodbye")

@@ -2,37 +2,40 @@ from djitellopy import Tello
 import cv2
 import time
 
-print("Create Tello object")
-tello = Tello()
+if __name__ == '__main__':
 
-print("Connect to Tello Drone")
-tello.connect()
+    print("Create Tello object")
+    tello = Tello()
 
-battery_level = tello.get_battery()
-print(f"Battery Life Percentage: {battery_level}")
+    print("Connect to Tello Drone")
+    tello.connect()
 
-time.sleep(2)
+    battery_level = tello.get_battery()
+    print(f"Battery Life Percentage: {battery_level}")
 
-print("Turn Video Stream On")
-tello.streamon()
+    time.sleep(2)
 
-# read a single image from the Tello video feed
-print("Read Tello Image")
-frame_read = tello.get_frame_read()
+    print("Turn Video Stream On")
+    tello.streamon()
 
-time.sleep(2)
-while True:
     # read a single image from the Tello video feed
     print("Read Tello Image")
-    tello_video_image = frame_read.frame
+    frame_read = tello.get_frame_read()
 
-    # use opencv to write image
-    if tello_video_image is not None:
-        cv2.imshow("TelloVideo", tello_video_image)
+    time.sleep(2)
+    while True:
+        # read a single image from the Tello video feed
+        print("Read Tello Image")
+        tello_video_image = frame_read.frame
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        # use opencv to write image
+        if tello_video_image is not None:
+            cv2.imshow("TelloVideo", tello_video_image)
 
-tello.streamoff()
-cv2.destroyWindow('TelloVideo')
-cv2.destroyAllWindows()
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    time.sleep(1)
+    tello.streamoff()
+    cv2.destroyWindow('TelloVideo')
+    cv2.destroyAllWindows()

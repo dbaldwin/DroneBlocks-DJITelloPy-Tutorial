@@ -35,45 +35,46 @@ def flight_pattern():
                 up_flag = True
                 tello.send_rc_control(0, 0, -speed, 0)
 
+if __name__ == '__main__':
 
-print("Create Tello object")
-tello = Tello()
+    print("Create Tello object")
+    tello = Tello()
 
-print("Connect to Tello Drone")
-tello.connect()
+    print("Connect to Tello Drone")
+    tello.connect()
 
-battery_level = tello.get_battery()
-print(f"Battery Life Percentage: {battery_level}")
+    battery_level = tello.get_battery()
+    print(f"Battery Life Percentage: {battery_level}")
 
-time.sleep(2)
+    time.sleep(2)
 
-print("Turn Video Stream On")
-tello.streamon()
+    print("Turn Video Stream On")
+    tello.streamon()
 
-# read a single image from the Tello video feed
-print("Read Tello Image")
-frame_read = tello.get_frame_read()
-
-# create a thread to run the function
-flight_pattern_thread = Thread(target=flight_pattern, daemon=True)
-flight_pattern_thread.start()
-
-time.sleep(2)
-print('Press:  q  to quit')
-while True:
     # read a single image from the Tello video feed
-    tello_video_image = frame_read.frame
+    print("Read Tello Image")
+    frame_read = tello.get_frame_read()
 
-    # use opencv to write image
-    if tello_video_image is not None:
-        cv2.imshow("TelloVideo", tello_video_image)
+    # create a thread to run the function
+    flight_pattern_thread = Thread(target=flight_pattern, daemon=True)
+    flight_pattern_thread.start()
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    time.sleep(2)
+    print('Press:  q  to quit')
+    while True:
+        # read a single image from the Tello video feed
+        tello_video_image = frame_read.frame
 
-tello.land()
-time.sleep(1)
+        # use opencv to write image
+        if tello_video_image is not None:
+            cv2.imshow("TelloVideo", tello_video_image)
 
-tello.streamoff()
-cv2.destroyWindow('TelloVideo')
-cv2.destroyAllWindows()
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    tello.land()
+    time.sleep(1)
+
+    tello.streamoff()
+    cv2.destroyWindow('TelloVideo')
+    cv2.destroyAllWindows()

@@ -2,40 +2,43 @@ from djitellopy import Tello
 import cv2
 import time
 
-print("Create Tello object")
-tello = Tello()
+if __name__ == '__main__':
 
-print("Connect to Tello Drone")
-tello.connect()
+    print("Create Tello object")
+    tello = Tello()
 
-battery_level = tello.get_battery()
-print(f"Battery Life Percentage: {battery_level}")
+    print("Connect to Tello Drone")
+    tello.connect()
 
-time.sleep(2)
+    battery_level = tello.get_battery()
+    print(f"Battery Life Percentage: {battery_level}")
 
-print("Turn Video Stream On")
-tello.streamon()
+    time.sleep(2)
 
-frame_read = tello.get_frame_read()
+    print("Turn Video Stream On")
+    tello.streamon()
 
-print("Takeoff!")
-tello.takeoff()
+    print("Get image frame reader")
+    frame_read = tello.get_frame_read()
 
-print("I will take a picture in 2 seconds")
-time.sleep(1)
-print("I will take a picture in 1 seconds")
-time.sleep(1)
+    print("Takeoff!")
+    tello.takeoff()
 
-# read a single image from the Tello video feed
-print("Read Tello Image")
-tello_video_image = frame_read.frame
+    print("I will take a picture in 2 seconds")
+    time.sleep(1)
+    print("I will take a picture in 1 seconds")
+    time.sleep(1)
 
-print("Write tello-picture.png")
-# use opencv to write image
-cv2.imwrite("tello-picture.png", tello_video_image)
+    # read a single image from the Tello video feed
+    print("Read Tello Image")
+    tello_video_image = frame_read.frame
 
-print("Land")
-tello.land()
+    print("Write tello-picture.png")
+    # use opencv to write image
+    cv2.imwrite("tello-picture.png", tello_video_image)
 
-print("Turn Tello video stream off")
-tello.streamoff()
+    print("Land")
+    tello.land()
+
+    print("Turn Tello video stream off")
+    tello.streamoff()

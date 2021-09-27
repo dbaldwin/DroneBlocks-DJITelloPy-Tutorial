@@ -1,23 +1,28 @@
 from djitellopy import Tello
+import time
 
-print("Create Tello object")
-tello = Tello()
+if __name__ == '__main__':
 
-print("Connect to Tello Drone")
-tello.connect()
+    print("Create Tello object")
+    tello = Tello()
 
-battery_level = tello.get_battery()
-print(f"Battery Life Percentage: {battery_level}")
+    print("Connect to Tello Drone")
+    tello.connect()
 
-print("Takeoff!")
-tello.takeoff()
+    battery_level = tello.get_battery()
+    print(f"Battery Life Percentage: {battery_level}")
 
-print("Rotate Clockwise")
-tello.rotate_clockwise(90)
+    print("Takeoff!")
+    tello.takeoff()
 
-print("Rotate Counter Clockwise")
-tello.rotate_counter_clockwise(90)
+    print("Rotate Clockwise")
+    tello.rotate_clockwise(90)
 
-print("landing")
-tello.land()
-print("touchdown.... goodbye")
+    time.sleep(1)
+
+    print("Rotate Counter Clockwise")
+    tello.rotate_counter_clockwise(90)
+
+    print("landing")
+    tello.land()
+    print("touchdown.... goodbye")

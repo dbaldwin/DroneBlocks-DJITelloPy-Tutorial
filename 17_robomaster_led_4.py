@@ -1,16 +1,38 @@
-from djitellopy import Tello
 from DroneBlocksTello import DroneBlocksTello
 import time
-import random
 
-print("Create Tello object")
-tello = Tello()
-db_tello = DroneBlocksTello()
+if __name__ == '__main__':
 
-print("Connect to Tello Drone")
-tello.connect()
+    print("Create Tello object")
+    db_tello = DroneBlocksTello()
 
-battery_level = tello.get_battery()
-print(f"Battery Life Percentage: {battery_level}")
+    print("Connect to Tello Drone")
+    db_tello.connect()
 
-db_tello.tt_clear_display()
+    battery_level = db_tello.get_battery()
+    print(f"Battery Life Percentage: {battery_level}")
+
+    for color in ['red', 'blue', 'purple']:
+        db_tello.clear_display()
+
+        # db_tello.display_message("Hello Python class",)
+
+        db_tello.display_up_arrow(color)
+
+        time.sleep(1)
+
+        db_tello.display_down_arrow(color)
+
+        time.sleep(1)
+
+        db_tello.display_left_arrow(color)
+
+        time.sleep(1)
+
+        db_tello.display_right_arrow(color)
+
+        time.sleep(1)
+
+    db_tello.display_heart('red')
+
+

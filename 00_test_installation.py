@@ -3,4 +3,5 @@ import cv2
 import time
 from threading import Thread
 
-print("Your installation worked!")
+if __name__ == '__main__':
+    print("Your installation worked!")
